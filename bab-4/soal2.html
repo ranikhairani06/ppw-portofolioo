@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Form Pendaftaran Peserta</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background-color:#f4f6f8;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+img{
+    display:block;
+    margin:auto;
+    border-radius:8px;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+button{
+    margin-top:15px;
+    padding:10px;
+    width:100%;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#45a049;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Gambar di atas form -->
+<img src="https://picsum.photos/600/200" alt="Banner Pendaftaran" width="100%">
+
+<h1>Form Pendaftaran Peserta</h1>
+
+<!-- FORM -->
+<form action="tujuan.html" method="post">
+
+<fieldset>
+<legend>Data Pribadi</legend>
+
+<label>Nama Lengkap</label>
+<input type="text" placeholder="Masukkan nama lengkap" required>
+
+<label>Email</label>
+<input type="email" placeholder="Masukkan email" required>
+
+<label>Password</label>
+<input type="password" required>
+
+<label>Jenis Kelamin</label>
+<input type="radio" name="jk"> Laki-laki
+<input type="radio" name="jk"> Perempuan
+
+<label>Tanggal Lahir</label>
+<input type="date">
+
+</fieldset>
+
+<fieldset>
+<legend>Informasi Tambahan</legend>
+
+<label>Pilih Kota</label>
+<input list="kota">
+
+<datalist id="kota">
+<option value="Jakarta">
+<option value="Bandung">
+<option value="Yogyakarta">
+<option value="Surabaya">
+</datalist>
+
+<label>Pilih Pendidikan</label>
+
+<select>
+<optgroup label="SMA">
+<option>IPA</option>
+<option>IPS</option>
+</optgroup>
+
+<optgroup label="Perguruan Tinggi">
+<option>Teknik Informatika</option>
+<option>Sistem Informasi</option>
+<option>Manajemen</option>
+</optgroup>
+</select>
+
+<label>Upload Foto</label>
+<input type="file">
+
+<label>Pesan / Alasan Mendaftar</label>
+<textarea rows="4"></textarea>
+
+</fieldset>
+
+
+<button type="submit">Daftar Sekarang</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
