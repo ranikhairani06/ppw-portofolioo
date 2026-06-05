@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Nilai Mahasiswa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1437;
+      --navy2: #112055;
+      --blue: #3a86ff;
+      --teal: #0acf97;
+      --amber: #f9c846;
+      --red: #ff6b6b;
+      --purple: #a855f7;
+      --bg: #f0f4ff;
+      --sidebar-w: 230px;
+    }
+
+    * { font-family: 'Sora', sans-serif; }
+
+    body { background: var(--bg); min-height: 100vh; }
+
+    /* ── NAVBAR ── */
+    .top-bar {
+      background: var(--navy);
+      padding: .75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 999;
+      box-shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+
+    .top-bar .brand {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.4px;
+    }
+
+    .top-bar .brand span { color: var(--blue); }
+
+    .top-bar-nav a {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      margin-left: 1.4rem;
+      transition: color .2s;
+    }
+
+    .top-bar-nav a:hover { color: #fff; }
+
+    .top-bar .badge-notif {
+      background: var(--red);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      border-radius: 99px;
+      padding: 2px 7px;
+      vertical-align: middle;
+    }
+
+    /* ── LAYOUT ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 2.4rem auto;
+      padding: 0 1.2rem;
+    }
+
+    /* ── PROFILE CARD ── */
+    .profile-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #1a3a7a 100%);
+      border-radius: 22px;
+      padding: 2rem 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      box-shadow: 0 8px 40px rgba(11,20,55,.35);
+      margin-bottom: 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,134,255,.18) 0%, transparent 70%);
+    }
+
+    .profile-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.25);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #1a3a7a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .profile-info { flex: 1; }
+
+    .profile-info .name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: .3rem;
+    }
+
+    .profile-info .meta {
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      margin-bottom: .7rem;
+    }
+
+    .profile-info .meta span {
+      color: rgba(255,255,255,.85);
+      font-weight: 600;
+    }
+
+    .badge-aktif {
+      background: rgba(10,207,151,.18);
+      border: 1.5px solid var(--teal);
+      color: var(--teal);
+      font-size: .75rem;
+      font-weight: 700;
+      border-radius: 99px;
+      padding: 4px 14px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06), 0 6px 24px rgba(0,0,0,.04);
+      transition: transform .25s, box-shadow .25s;
+      height: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    }
+
+    .stat-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.blue { background: rgba(58,134,255,.12); }
+    .stat-icon.teal { background: rgba(10,207,151,.12); }
+    .stat-icon.amber { background: rgba(249,200,70,.15); }
+
+    .stat-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: .2rem;
+    }
+
+    .stat-lbl {
+      font-size: .82rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    /* ── TABLE SECTION ── */
+    .table-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      overflow: hidden;
+      margin-top: 1.8rem;
+    }
+
+    .table-header {
+      padding: 1.3rem 1.8rem;
+      border-bottom: 1px solid #f0f2f8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .table-header h5 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .semester-badge {
+      background: rgba(58,134,255,.1);
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 5px 14px;
+    }
+
+    table.nilai-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+
+    table.nilai-table thead tr {
+      background: #f7f9ff;
+    }
+
+    table.nilai-table thead th {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      color: #6b7280;
+      padding: .85rem 1.2rem;
+      border-bottom: 2px solid #eef0f8;
+      white-space: nowrap;
+    }
+
+    table.nilai-table tbody tr {
+      border-bottom: 1px solid #f0f2f8;
+      transition: background .18s;
+    }
+
+    table.nilai-table tbody tr:last-child { border-bottom: none; }
+    table.nilai-table tbody tr:hover { background: #f7f9ff; }
+
+    table.nilai-table td {
+      padding: .9rem 1.2rem;
+      color: #374151;
+      vertical-align: middle;
+    }
+
+    .matkul-name { font-weight: 600; color: var(--navy); }
+    .matkul-code { font-size: .75rem; color: #9ca3af; margin-top: 1px; }
+
+    /* badge nilai */
+    .badge-nilai {
+      font-size: .76rem;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 4px 12px;
+      display: inline-block;
+    }
+
+    .badge-a  { background: #d1fae5; color: #065f46; }
+    .badge-b  { background: #dbeafe; color: #1e40af; }
+    .badge-c  { background: #fef9c3; color: #854d0e; }
+    .badge-de { background: #fee2e2; color: #991b1b; }
+
+    .btn-detail {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .btn-detail:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── MODAL ── */
+    .modal-content {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 16px 64px rgba(0,0,0,.18);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      border-radius: 20px 20px 0 0;
+      padding: 1.3rem 1.6rem;
+      border-bottom: none;
+    }
+
+    .modal-header .modal-title { color: #fff; font-weight: 700; font-size: 1rem; }
+    .modal-header .btn-close { filter: invert(1); opacity: .7; }
+
+    .modal-body { padding: 1.6rem; }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .7rem 0;
+      border-bottom: 1px solid #f0f2f8;
+      font-size: .9rem;
+    }
+
+    .detail-item:last-child { border-bottom: none; }
+    .detail-item .key { color: #6b7280; font-weight: 500; }
+    .detail-item .val { font-weight: 700; color: var(--navy); }
+
+    /* ── FOOTER ── */
+    .main-footer {
+      text-align: center;
+      padding: 1.4rem;
+      color: #9ca3af;
+      font-size: .82rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="brand">📘 Portal<span>Akademik</span></div>
+    <div class="top-bar-nav d-none d-md-block">
+      <a href="#">Dashboard</a>
+      <a href="#">KRS</a>
+      <a href="#">Jadwal</a>
+      <a href="#">Transkrip</a>
+      <a href="#">Notifikasi <span class="badge-notif">3</span></a>
+    </div>
+    <div>
+      <span style="color:rgba(255,255,255,.5);font-size:.83rem">Nikmah Putri Khairani</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrap">
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+      <div class="profile-avatar">👨‍🎓</div>
+      <div class="profile-info">
+        <div class="name">Nikmah Putri Khairani</div>
+        <div class="meta">NIM: <span>2556830227426</span> &nbsp;|&nbsp; Program Studi: <span>Teknologi Rekayasa Perangkat Lunak</span></div>
+        <div class="meta">Semester: <span>2</span> &nbsp;|&nbsp; Angkatan: <span>2025</span></div>
+        <span class="badge-aktif">● AKTIF</span>
+      </div>
+      <div class="text-end">
+        <button class="btn btn-sm" style="background:rgba(255,255,255,.12);color:#fff;border-radius:10px;font-size:.82rem;border:1px solid rgba(255,255,255,.2);">
+          📄 Unduh Transkrip
+        </button>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="row g-3 mb-2">
+      <div class="col-12 col-sm-4">
+        <div class="stat-card">
+          <div class="stat-icon blue">📚</div>
+          <div>
+            <div class="stat-val">88</div>
+            <div class="stat-lbl">Total SKS Ditempuh</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-4">
+        <div class="stat-card">
+          <div class="stat-icon teal">🏆</div>
+          <div>
+            <div class="stat-val">3.72</div>
+            <div class="stat-lbl">Indeks Prestasi Kumulatif</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-4">
+        <div class="stat-card">
+          <div class="stat-icon amber">✅</div>
+          <div>
+            <div class="stat-val">24</div>
+            <div class="stat-lbl">Mata Kuliah Lulus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+      <div class="table-header">
+        <h5>📋 Daftar Nilai — Semester 2</h5>
+        <span class="semester-badge">Tahun Ajaran 2025/2026</span>
+      </div>
+      <div class="table-responsive">
+        <table class="nilai-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Mata Kuliah</th>
+              <th>SKS</th>
+              <th>Nilai Huruf</th>
+              <th>Nilai Angka</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <div class="matkul-name">Pemrograman Web Lanjut</div>
+                <div class="matkul-code">SI601 — Teknik</div>
+              </td>
+              <td>3</td>
+              <td><span class="badge-nilai badge-a">A</span></td>
+              <td><strong>3.75</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(1)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <div class="matkul-name">Basis Data Terdistribusi</div>
+                <div class="matkul-code">SI602 — Teknik</div>
+              </td>
+              <td>3</td>
+              <td><span class="badge-nilai badge-a">A+</span></td>
+              <td><strong>4.00</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(2)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <div class="matkul-name">Kecerdasan Buatan</div>
+                <div class="matkul-code">SI603 — Teknik</div>
+              </td>
+              <td>3</td>
+              <td><span class="badge-nilai badge-b">B+</span></td>
+              <td><strong>3.50</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(3)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <div class="matkul-name">Keamanan Sistem Informasi</div>
+                <div class="matkul-code">SI604 — Manajemen</div>
+              </td>
+              <td>2</td>
+              <td><span class="badge-nilai badge-b">B</span></td>
+              <td><strong>3.00</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(4)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <div class="matkul-name">Manajemen Proyek TI</div>
+                <div class="matkul-code">SI605 — Manajemen</div>
+              </td>
+              <td>3</td>
+              <td><span class="badge-nilai badge-c">C+</span></td>
+              <td><strong>2.50</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(5)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                <div class="matkul-name">Metodologi Penelitian</div>
+                <div class="matkul-code">SI606 — Umum</div>
+              </td>
+              <td>2</td>
+              <td><span class="badge-nilai badge-a">A</span></td>
+              <td><strong>3.75</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(6)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>
+                <div class="matkul-name">Analisis & Desain Sistem</div>
+                <div class="matkul-code">SI607 — Teknik</div>
+              </td>
+              <td>3</td>
+              <td><span class="badge-nilai badge-b">B</span></td>
+              <td><strong>3.00</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(7)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>
+                <div class="matkul-name">Etika Profesi</div>
+                <div class="matkul-code">SI608 — Umum</div>
+              </td>
+              <td>2</td>
+              <td><span class="badge-nilai badge-de">D</span></td>
+              <td><strong>1.00</strong></td>
+              <td><button class="btn-detail" onclick="bukaModal(8)" data-bs-toggle="modal" data-bs-target="#modalDetail">Detail</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="main-footer">
+    &copy; 2025 PortalAkademik UnivInfo — Seluruh data bersifat rahasia.
+  </div>
+
+  <!-- MODAL DETAIL -->
+  <div class="modal fade" id="modalDetail" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalJudul">🎓 Detail Mata Kuliah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalIsiDetail"></div>
+          <div class="mt-3 pt-2 border-top">
+            <p class="text-muted mb-0" style="font-size:.8rem">
+              ℹ️ Jika terdapat keberatan atas nilai ini, hubungi Dosen Pengampu paling lambat 7 hari setelah nilai dikeluarkan.
+            </p>
+          </div>
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-secondary btn-sm" style="border-radius:9px;" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary btn-sm" style="border-radius:9px;background:var(--navy);border:none;">📋 Cetak</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const dataMK = [
+      null, // index 0 kosong
+      {
+        kode: 'SI601', nama: 'Pemrograman Web Lanjut', sks: 3, huruf: 'A', angka: '4.00',
+        dosen: 'Dr. Rina Kusuma, M.Kom', jadwal: 'Selasa, 08.00–10.30', ruang: 'Lab Komputer 2',
+        semester: '6', status: 'Lulus', mutu: '12'
+      },
+      {
+        kode: 'SI602', nama: 'Basis Data Terdistribusi', sks: 3, huruf: 'A+', angka: '4.00',
+        dosen: 'Prof. Hendra Wijaya, Ph.D', jadwal: 'Rabu, 10.00–12.30', ruang: 'Ruang 301',
+        semester: '6', status: 'Lulus', mutu: '12'
+      },
+      {
+        kode: 'SI603', nama: 'Kecerdasan Buatan', sks: 3, huruf: 'B+', angka: '3.50',
+        dosen: 'Dr. Ahmad Fauzi, M.T', jadwal: 'Kamis, 13.00–15.30', ruang: 'Ruang 205',
+        semester: '6', status: 'Lulus', mutu: '10.5'
+      },
+      {
+        kode: 'SI604', nama: 'Keamanan Sistem Informasi', sks: 2, huruf: 'B', angka: '3.00',
+        dosen: 'Ir. Siti Rahayu, M.Sc', jadwal: 'Jumat, 08.00–09.40', ruang: 'Ruang 102',
+        semester: '6', status: 'Lulus', mutu: '6'
+      },
+      {
+        kode: 'SI605', nama: 'Manajemen Proyek TI', sks: 3, huruf: 'C+', angka: '2.50',
+        dosen: 'Drs. Bambang Susilo, M.M', jadwal: 'Senin, 13.00–15.30', ruang: 'Ruang 401',
+        semester: '6', status: 'Lulus', mutu: '7.5'
+      },
+      {
+        kode: 'SI606', nama: 'Metodologi Penelitian', sks: 2, huruf: 'A', angka: '4.00',
+        dosen: 'Dr. Dewi Lestari, M.Pd', jadwal: 'Rabu, 13.00–14.40', ruang: 'Ruang 303',
+        semester: '6', status: 'Lulus', mutu: '8'
+      },
+      {
+        kode: 'SI607', nama: 'Analisis & Desain Sistem', sks: 3, huruf: 'B', angka: '3.00',
+        dosen: 'Dr. Teguh Purnomo, M.Kom', jadwal: 'Selasa, 13.00–15.30', ruang: 'Lab Jaringan',
+        semester: '6', status: 'Lulus', mutu: '9'
+      },
+      {
+        kode: 'SI608', nama: 'Etika Profesi', sks: 2, huruf: 'D', angka: '1.00',
+        dosen: 'Drs. Yusuf Hidayat, M.Hum', jadwal: 'Jumat, 10.00–11.40', ruang: 'Ruang 202',
+        semester: '6', status: '⚠️ Perlu Ulang', mutu: '2'
+      },
+    ];
+
+    const badgeMap = {
+      'A': 'badge-a', 'A+': 'badge-a',
+      'B+': 'badge-b', 'B': 'badge-b',
+      'C+': 'badge-c', 'C': 'badge-c',
+      'D': 'badge-de', 'E': 'badge-de'
+    };
+
+    function bukaModal(id) {
+      const mk = dataMK[id];
+      document.getElementById('modalJudul').textContent = `🎓 ${mk.nama}`;
+      const badge = `<span class="badge-nilai ${badgeMap[mk.huruf] || 'badge-b'}">${mk.huruf}</span>`;
+      document.getElementById('modalIsiDetail').innerHTML = `
+        <div class="detail-item"><span class="key">Kode MK</span><span class="val">${mk.kode}</span></div>
+        <div class="detail-item"><span class="key">Mata Kuliah</span><span class="val">${mk.nama}</span></div>
+        <div class="detail-item"><span class="key">SKS</span><span class="val">${mk.sks} SKS</span></div>
+        <div class="detail-item"><span class="key">Nilai Huruf</span><span class="val">${badge}</span></div>
+        <div class="detail-item"><span class="key">Nilai Angka</span><span class="val">${mk.angka}</span></div>
+        <div class="detail-item"><span class="key">Bobot Mutu</span><span class="val">${mk.mutu}</span></div>
+        <div class="detail-item"><span class="key">Dosen Pengampu</span><span class="val">${mk.dosen}</span></div>
+        <div class="detail-item"><span class="key">Jadwal Kuliah</span><span class="val">${mk.jadwal}</span></div>
+        <div class="detail-item"><span class="key">Ruang</span><span class="val">${mk.ruang}</span></div>
+        <div class="detail-item"><span class="key">Semester</span><span class="val">${mk.semester}</span></div>
+        <div class="detail-item"><span class="key">Status</span><span class="val">${mk.status}</span></div>
+      `;
+    }
+  </script>
+</body>
+</html>

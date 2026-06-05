@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tugas 1 — Eksplorasi Grid System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --surface: #16213e;
+      --card-bg: #ffffff;
+      --text-muted: #6b7280;
+      --gradient: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+    }
+
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    body {
+      background: #f0f2f5;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-custom {
+      background: var(--gradient);
+      box-shadow: 0 4px 24px rgba(0,0,0,.35);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand-custom {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff !important;
+      letter-spacing: -0.5px;
+    }
+
+    .navbar-brand-custom span {
+      color: var(--accent);
+    }
+
+    .nav-link-custom {
+      color: rgba(255,255,255,.78) !important;
+      font-weight: 500;
+      font-size: .92rem;
+      letter-spacing: .3px;
+      padding: .45rem .85rem !important;
+      border-radius: 8px;
+      transition: all .25s;
+      position: relative;
+    }
+
+    .nav-link-custom:hover,
+    .nav-link-custom.active {
+      color: #fff !important;
+      background: rgba(233,69,96,.18);
+    }
+
+    .nav-link-custom.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%; transform: translateX(-50%);
+      width: 20px; height: 3px;
+      background: var(--accent);
+      border-radius: 99px;
+    }
+
+    .navbar-toggler {
+      border: 1.5px solid rgba(255,255,255,.3);
+      padding: .35rem .55rem;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* ── HERO BAND ── */
+    .hero-band {
+      background: var(--gradient);
+      padding: 3.5rem 0 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(233,69,96,.18) 0%, transparent 70%);
+    }
+
+    .hero-band h1 {
+      color: #fff;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      position: relative;
+    }
+
+    .hero-band p {
+      color: rgba(255,255,255,.72);
+      font-size: 1rem;
+      position: relative;
+    }
+
+    /* ── CARDS ── */
+    .section-cards {
+      padding: 3.5rem 0 4rem;
+    }
+
+    .card-custom {
+      border: none;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07), 0 8px 32px rgba(0,0,0,.06);
+      transition: transform .3s ease, box-shadow .3s ease;
+      height: 100%;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.14), 0 24px 64px rgba(0,0,0,.1);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+    }
+
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .card-custom:hover .card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    .card-body-custom {
+      padding: 1.5rem;
+    }
+
+    .card-body-custom h5 {
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: var(--primary);
+      margin-bottom: .55rem;
+    }
+
+    .card-body-custom p {
+      color: var(--text-muted);
+      font-size: .9rem;
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-card {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: .88rem;
+      font-weight: 600;
+      padding: .55rem 1.4rem;
+      transition: all .25s;
+    }
+
+    .btn-card:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    .footer-custom {
+      background: var(--primary);
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      padding: 1.6rem 0;
+      border-top: 3px solid var(--accent);
+    }
+
+    .footer-custom a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-custom a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand-custom navbar-brand" href="#">
+        Rani<span>Academy</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto gap-1">
+          <li class="nav-item">
+            <a class="nav-link-custom nav-link active" href="#">🏠 Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link-custom nav-link" href="#">📚 Mata Kuliah</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link-custom nav-link" href="#">👥 Mahasiswa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link-custom nav-link" href="#">📊 Dashboard</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="btn btn-sm btn-danger fw-semibold px-3" href="#" style="border-radius:9px;">Masuk</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-band">
+    <div class="container">
+      <h1>Platform Pembelajaran Digital</h1>
+      <p>RaniAcademy menyediakan materi teknologi terkini dengan tampilan responsif dan pengalaman belajar yang interaktif.</p>
+    </div>
+  </div>
+
+  <!-- CARDS SECTION -->
+  <section class="section-cards">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="pemrogramanweb.jpg" alt="Pemrograman Web" />
+              <span class="card-tag">Populer</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Pemrograman Web</h5>
+              <p>Pelajari dasar-dasar pembuatan website modern dengan HTML, CSS, dan JavaScript dari nol hingga mahir dalam waktu singkat.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop" alt="Basis Data" />
+              <span class="card-tag">Wajib</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Basis Data</h5>
+              <p>Kuasai konsep perancangan database relasional, normalisasi, serta penggunaan SQL untuk manipulasi dan query data secara efisien.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop" alt="Kecerdasan Buatan" />
+              <span class="card-tag">Baru</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Kecerdasan Buatan</h5>
+              <p>Jelajahi dunia AI dan Machine Learning, mulai dari algoritma klasik hingga neural network dan pengembangan model prediktif.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop" alt="Jaringan Komputer" />
+              <span class="card-tag">Inti</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Jaringan Komputer</h5>
+              <p>Memahami arsitektur jaringan, protokol komunikasi TCP/IP, keamanan jaringan, dan konfigurasi perangkat network secara praktis.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop" alt="Rekayasa Perangkat Lunak" />
+              <span class="card-tag">Pilihan</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Rekayasa Perangkat Lunak</h5>
+              <p>Pelajari metodologi pengembangan software, desain sistem, pengujian, serta manajemen proyek menggunakan pendekatan Agile dan Scrum.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-custom">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop" alt="Analisis Data" />
+              <span class="card-tag">Trending</span>
+            </div>
+            <div class="card-body-custom">
+              <h5>Analisis Data</h5>
+              <p>Mengolah, memvisualisasikan, dan menginterpretasi data menggunakan Python, pandas, dan tools visualisasi seperti Matplotlib & Seaborn.</p>
+              <button class="btn-card">Lihat Detail →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+          <span class="fw-bold text-white">RaniAcademy</span> &copy;2026. All rights reserved.
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          Dikembangkan menggunakan <a href="#">Bootstrap 5</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
