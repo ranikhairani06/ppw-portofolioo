@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Components</title>
+
+  <style>
+    /* CSS VARIABLES */
+    :root {
+      --primary: #6c63ff;
+      --secondary: #574fd6;
+      --bg: #f5f7ff;
+      --text: #333;
+      --white: #fff;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    /* Hover 1: warna */
+    .btn1 {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn1:hover {
+      background: var(--secondary);
+    }
+
+    /* Hover 2: transform */
+    .btn2 {
+      background: #fff;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn2:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hover 3: shadow */
+    .btn3 {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn3:hover {
+      box-shadow: 0 10px 20px var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    /* SPINNER */
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ddd;
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 40px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* CARD ROTATE */
+    .card-container {
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 200px;
+      height: 250px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--shadow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      backface-visibility: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1 class="fade-in">Interactive Components ✨</h1>
+
+  <!-- BUTTONS -->
+  <div class="btn-group fade-in">
+    <button class="btn btn1">Hover Warna</button>
+    <button class="btn btn2">Hover Zoom</button>
+    <button class="btn btn3">Hover Shadow</button>
+  </div>
+
+  <!-- SPINNER -->
+  <div class="spinner fade-in"></div>
+
+  <!-- CARD ROTATE -->
+  <div class="card-container fade-in">
+    <div class="card">
+      <div class="card-front">Hover Me 😎</div>
+      <div class="card-back">Hello! ✨</div>
+    </div>
+  </div>
+
+</body>
+</html>
