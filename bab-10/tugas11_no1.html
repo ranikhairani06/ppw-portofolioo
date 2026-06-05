@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tugas 1 - Bab XI - Cek Dua Bilangan</title>
+</head>
+<body>
+
+    <h2>Tugas Praktikum Bab XI - No. 1</h2>
+    <h3>Perbandingan Dua Bilangan</h3>
+
+    <hr>
+
+    <p>Klik tombol di bawah untuk memasukkan 2 bilangan dan melihat perbandingannya.</p>
+
+    <button onclick="cekBilangan()">Masukkan 2 Bilangan</button>
+
+    <br><br>
+
+    <div id="hasil-bilangan" style="border: 1px solid black; padding: 10px; display: none;">
+    </div>
+
+    <script>
+        function cekBilangan() {
+            // Meminta input 2 bilangan menggunakan prompt()
+            var bilangan1 = prompt("Masukkan BILANGAN KE-1:", "");
+            var bilangan2 = prompt("Masukkan BILANGAN KE-2:", "");
+
+            // Mengubah input dari string ke angka
+            bilangan1 = parseFloat(bilangan1);
+            bilangan2 = parseFloat(bilangan2);
+
+            // Cek apakah input valid (bukan NaN)
+            if (isNaN(bilangan1) || isNaN(bilangan2)) {
+                alert("Input tidak valid! Harap masukkan angka.");
+                return;
+            }
+
+            // Cek kondisi kedua bilangan
+            var hasilCek = "";
+
+            if (bilangan1 > bilangan2) {
+                hasilCek = "BILANGAN KE-1 LEBIH BESAR DARI BILANGAN KE-2";
+            } else if (bilangan1 < bilangan2) {
+                hasilCek = "BILANGAN KE-1 LEBIH KECIL DARI BILANGAN KE-2";
+            } else {
+                hasilCek = "BILANGAN KE-1 SAMA DENGAN BILANGAN KE-2";
+            }
+
+            // Tampilkan hasil ke halaman
+            var kotakHasil = document.getElementById("hasil-bilangan");
+            kotakHasil.style.display = "block";
+            kotakHasil.innerHTML = "<p><b>Bilangan Ke-1:</b> " + bilangan1 + "</p>" +
+                                   "<p><b>Bilangan Ke-2:</b> " + bilangan2 + "</p>" +
+                                   "<p><b>Hasil:</b> " + hasilCek + "</p>";
+        }
+    </script>
+
+</body>
+</html>

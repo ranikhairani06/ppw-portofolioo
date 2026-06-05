@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tugas 1 - Bab X - Cara Penulisan Javascript</title>
+
+    <!-- CARA 1: EMBED - Javascript ditulis di dalam tag script di head -->
+    <script>
+        console.log("Halo dari Javascript EMBED di HEAD!");
+    </script>
+</head>
+<body>
+
+    <h2>Tugas Praktikum Bab X - No. 1</h2>
+    <h3>Cara Penulisan Kode Javascript</h3>
+
+    <hr>
+
+    <h4>1. Embed (di dalam tag &lt;script&gt;)</h4>
+    <p>Javascript bisa ditulis langsung di dalam file HTML menggunakan tag script.</p>
+
+    <!-- CARA 1: EMBED - Javascript ditulis di dalam tag script di body -->
+    <script>
+        document.write("<p><b>Output dari Javascript EMBED:</b> Saya belajar Javascript!</p>");
+        console.log("Halo dari Javascript EMBED di BODY!");
+    </script>
+
+    <hr>
+
+    <h4>2. Inline (ditulis di atribut HTML)</h4>
+    <p>Klik tombol di bawah ini:</p>
+
+    <!-- CARA 2: INLINE - Javascript ditulis langsung di atribut HTML -->
+    <button onclick="alert('Halo! Ini pesan dari Javascript INLINE!')">Klik Saya (Inline JS)</button>
+
+    <br><br>
+
+    <!-- Inline juga bisa di href -->
+    <a href="javascript:alert('Ini juga Inline JS dari atribut href!')">Klik Link Ini (Inline JS di href)</a>
+
+    <hr>
+
+    <h4>3. Eksternal (file .js terpisah)</h4>
+    <p>Javascript ditulis di file terpisah bernama <code>kode-program.js</code></p>
+
+    <!-- CARA 3: EKSTERNAL - menyisipkan file JS dari luar -->
+    <script src="kode-program.js"></script>
+
+    <hr>
+    <p><i>Cek Console browser (F12) untuk melihat output console.log()</i></p>
+
+</body>
+</html>

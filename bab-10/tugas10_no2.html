@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tugas 2 - Bab X - Output Javascript</title>
+
+    <script>
+        // CARA 1: console.log() - menampilkan ke console browser
+        console.log("Halo dari console.log()! Saya sedang belajar Javascript.");
+        console.log("Nama saya: Rani");
+        console.log("Umur saya: 19 tahun");
+
+        // CARA 2: alert() - menampilkan jendela dialog
+        alert("Selamat datang!\nIni adalah contoh output menggunakan alert()");
+    </script>
+</head>
+<body>
+
+    <h2>Tugas Praktikum Bab X - No. 2</h2>
+    <h3>4 Cara Menampilkan Output Javascript</h3>
+
+    <hr>
+
+    <h4>1. console.log()</h4>
+    <p>Output dikirim ke Console browser. Buka Developer Tools (F12) lalu pilih tab Console untuk melihatnya.</p>
+    <p><i>Sudah dijalankan di &lt;head&gt; saat halaman dimuat.</i></p>
+
+    <hr>
+
+    <h4>2. alert()</h4>
+    <p>Menampilkan jendela dialog popup. Dialog sudah muncul saat halaman pertama dibuka.</p>
+    <p>Klik tombol di bawah untuk memunculkan alert lagi:</p>
+    <button onclick="alert('Ini contoh alert() lagi!')">Tampilkan Alert</button>
+
+    <hr>
+
+    <h4>3. document.write()</h4>
+    <p>Menulis langsung ke dokumen HTML:</p>
+
+    <script>
+        // CARA 3: document.write() - menulis ke dokumen HTML
+        document.write("<p><b>Output dari document.write():</b></p>");
+        document.write("<p>Nama: Rani</p>");
+        document.write("<p>Kelas: TI-2A</p>");
+        document.write("<p>Mata Kuliah: Pemrograman Web 1</p>");
+    </script>
+
+    <hr>
+
+    <h4>4. innerHTML</h4>
+    <p>Menampilkan output ke elemen HTML yang spesifik:</p>
+
+    <!-- Elemen target untuk innerHTML -->
+    <div id="kotak-output" style="border: 1px solid black; padding: 10px; background-color: lightyellow;">
+        <i>Output akan muncul di sini...</i>
+    </div>
+
+    <br>
+    <button onclick="tampilkanInnerHTML()">Tampilkan Output innerHTML</button>
+
+    <script>
+        // CARA 4: innerHTML - menulis ke elemen tertentu
+        function tampilkanInnerHTML() {
+            var kotakOutput = document.getElementById("kotak-output");
+            kotakOutput.innerHTML = "<p><b>Output dari innerHTML:</b></p>" +
+                                    "<p>Halo! Ini teks yang dimasukkan menggunakan innerHTML.</p>" +
+                                    "<p>Kita bisa menargetkan elemen HTML tertentu.</p>";
+        }
+
+        // Langsung jalankan innerHTML saat halaman dimuat juga
+        var hasil = document.getElementById("kotak-output");
+        hasil.innerHTML = "<p>Ini langsung diisi pakai innerHTML saat halaman dimuat!</p>";
+    </script>
+
+    <hr>
+    <p><i>Cek Console browser (F12) untuk melihat output console.log()</i></p>
+
+</body>
+</html>

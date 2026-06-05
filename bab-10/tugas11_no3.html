@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tugas 3 - Bab XI - Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .kalkulator {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            width: 48%;
+            padding: 8px;
+            margin: 2px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        #hasil {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: lightyellow;
+            border: 1px solid black;
+            font-size: 18px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Tugas Praktikum Bab XI - No. 3</h2>
+    <h3>Kalkulator Sederhana</h3>
+
+    <hr>
+
+    <div class="kalkulator">
+        <p>Masukkan 2 angka:</p>
+
+        <label>Angka 1:</label>
+        <input type="number" id="angka1" placeholder="Masukkan angka 1">
+
+        <label>Angka 2:</label>
+        <input type="number" id="angka2" placeholder="Masukkan angka 2">
+
+        <p>Pilih operasi:</p>
+
+        <button onclick="hitung('+')">Tambah (+)</button>
+        <button onclick="hitung('-')">Kurang (-)</button>
+        <button onclick="hitung('*')">Kali (*)</button>
+        <button onclick="hitung('/')">Bagi (/)</button>
+        <button onclick="hitung('%')">Sisa Bagi (%)</button>
+        <button onclick="resetKalkulator()">Reset</button>
+
+        <div id="hasil">Hasil akan muncul di sini...</div>
+    </div>
+
+    <script>
+        function hitung(operator) {
+            // Ambil nilai dari input
+            var angka1 = parseFloat(document.getElementById("angka1").value);
+            var angka2 = parseFloat(document.getElementById("angka2").value);
+
+            // Cek apakah input sudah diisi
+            if (isNaN(angka1) || isNaN(angka2)) {
+                alert("Harap isi kedua angka terlebih dahulu!");
+                return;
+            }
+
+            var hasil;
+            var namaOperasi;
+
+            // Tentukan operasi berdasarkan operator yang dipilih
+            if (operator == '+') {
+                hasil = angka1 + angka2;
+                namaOperasi = "Penjumlahan";
+            } else if (operator == '-') {
+                hasil = angka1 - angka2;
+                namaOperasi = "Pengurangan";
+            } else if (operator == '*') {
+                hasil = angka1 * angka2;
+                namaOperasi = "Perkalian";
+            } else if (operator == '/') {
+                // Cek pembagian dengan nol
+                if (angka2 == 0) {
+                    alert("Tidak bisa membagi dengan 0!");
+                    return;
+                }
+                hasil = angka1 / angka2;
+                namaOperasi = "Pembagian";
+            } else if (operator == '%') {
+                hasil = angka1 % angka2;
+                namaOperasi = "Sisa Bagi";
+            }
+
+            // Tampilkan hasil
+            var kotakHasil = document.getElementById("hasil");
+            kotakHasil.innerHTML = "<b>" + namaOperasi + ":</b><br>" +
+                                   angka1 + " " + operator + " " + angka2 + " = <b>" + hasil + "</b>";
+        }
+
+        function resetKalkulator() {
+            document.getElementById("angka1").value = "";
+            document.getElementById("angka2").value = "";
+            document.getElementById("hasil").innerHTML = "Hasil akan muncul di sini...";
+        }
+    </script>
+
+</body>
+</html>

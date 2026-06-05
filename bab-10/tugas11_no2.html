@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tugas 2 - Bab XI - Cek Praktikan PPW1</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Tugas Praktikum Bab XI - No. 2</h2>
+        <h3>Cek Praktikan PPW1</h3>
+
+        <hr>
+
+        <button class="btn btn-primary" onclick="cekPraktikan()">Mulai Pengecekan</button>
+
+        <br><br>
+
+        <div id="hasil-praktikan"></div>
+    </div>
+
+    <script>
+        function cekPraktikan() {
+            // Konfirmasi apakah pengguna adalah praktikan PPW1
+            var isPraktikan = confirm("Apakah anda praktikan PPW1?");
+
+            var kotakHasil = document.getElementById("hasil-praktikan");
+
+            if (isPraktikan) {
+                // Jika iya, tanya nama, NIM, dan angkatan
+                var nama = prompt("Masukkan Nama Anda:", "");
+                var nim = prompt("Masukkan NIM Anda:", "");
+                var angkatan = prompt("Masukkan Angkatan Anda:", "");
+
+                // Tampilkan data dalam tabel Bootstrap
+                kotakHasil.innerHTML =
+                    "<div class='alert alert-success'>Data berhasil dimasukkan!</div>" +
+                    "<table class='table table-bordered table-striped'>" +
+                    "  <thead class='table-dark'>" +
+                    "    <tr>" +
+                    "      <th>Keterangan</th>" +
+                    "      <th>Data</th>" +
+                    "    </tr>" +
+                    "  </thead>" +
+                    "  <tbody>" +
+                    "    <tr>" +
+                    "      <td>Nama</td>" +
+                    "      <td>" + nama + "</td>" +
+                    "    </tr>" +
+                    "    <tr>" +
+                    "      <td>NIM</td>" +
+                    "      <td>" + nim + "</td>" +
+                    "    </tr>" +
+                    "    <tr>" +
+                    "      <td>Angkatan</td>" +
+                    "      <td>" + angkatan + "</td>" +
+                    "    </tr>" +
+                    "    <tr>" +
+                    "      <td>Status</td>" +
+                    "      <td><b>Praktikan PPW1</b></td>" +
+                    "    </tr>" +
+                    "  </tbody>" +
+                    "</table>";
+
+            } else {
+                // Jika bukan praktikan PPW1
+                kotakHasil.innerHTML =
+                    "<div class='alert alert-danger'>" +
+                    "  <h4>Anda bukan praktikan PPW1, anda tidak boleh masuk!</h4>" +
+                    "</div>";
+            }
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
